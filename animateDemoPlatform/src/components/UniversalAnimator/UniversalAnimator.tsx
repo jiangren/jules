@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { ViewStyle } from 'react-native';
 import { AnimationSchema } from '../../types/AnimationSchema';
