@@ -11,6 +11,11 @@ export default function DemoPage() {
   const params = useParams();
   const router = useRouter();
   const [remountKey, setRemountKey] = useState(0);
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const slug = typeof params.slug === 'string' ? params.slug : params.slug?.[0];
 
@@ -22,6 +27,9 @@ export default function DemoPage() {
   const currentSchema: AnimationSchema | undefined = demoKey ? DemoAnimations[demoKey as keyof typeof DemoAnimations] : undefined;
 
   const restart = () => setRemountKey(prev => prev + 1);
+
+  // Return early for SSR to keep it simple, or keep UI skeleton
+  if (!mounted) return null;
 
   if (!currentSchema) {
     return (
@@ -44,9 +52,9 @@ export default function DemoPage() {
       </View>
 
       <View style={styles.actionContainer}>
-         <Pressable onPress={restart} style={styles.restartButton}>
-            <Text style={styles.restartButtonText}>Restart Animation</Text>
-          </Pressable>
+        <Pressable onPress={restart} style={styles.restartButton}>
+          <Text style={styles.restartButtonText}>Restart Animation</Text>
+        </Pressable>
       </View>
 
       <ScrollView style={styles.content} contentContainerStyle={styles.scrollContent}>
@@ -218,7 +226,7 @@ const styles = StyleSheet.create({
     overflow: 'scroll', // Allow horizontal scroll for code
   },
   code: {
-    fontFamily: Platform.OS === 'ios' ? 'Menlo' : 'monospace',
+    fontFamily: 'SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace',
     fontSize: 12,
     color: '#24292E',
   },

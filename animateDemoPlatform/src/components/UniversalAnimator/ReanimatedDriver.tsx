@@ -65,8 +65,8 @@ export const ReanimatedDriver: React.FC<ReanimatedDriverProps> = ({ schema, chil
   const rotateX = useSharedValue(schema.initial?.rotateX ?? '0deg');
   const rotateY = useSharedValue(schema.initial?.rotateY ?? '0deg');
   const backgroundColor = useSharedValue(schema.initial?.backgroundColor ?? 'transparent');
-  const width = useSharedValue(schema.initial?.width ?? 'auto'); // 'auto' might be tricky for timing
-  const height = useSharedValue(schema.initial?.height ?? 'auto');
+  const width = useSharedValue(schema.initial?.width ?? ('auto' as any));
+  const height = useSharedValue(schema.initial?.height ?? ('auto' as any));
   const borderRadius = useSharedValue(schema.initial?.borderRadius ?? 0);
 
   const propMap: Record<string, any> = {
@@ -79,7 +79,7 @@ export const ReanimatedDriver: React.FC<ReanimatedDriverProps> = ({ schema, chil
 
     Object.keys(propMap).forEach(key => {
       const sv = propMap[key];
-      const initialVal = schema.initial?.[key as keyof AnimationProperties] ?? sv.value; // default
+      const initialVal = schema.initial?.[key as keyof AnimationProperties] ?? sv.value;
 
       let sequence: any[] = [];
       let currentVal = initialVal;
@@ -90,33 +90,28 @@ export const ReanimatedDriver: React.FC<ReanimatedDriverProps> = ({ schema, chil
         const targetVal = step.to[key as keyof AnimationProperties];
 
         if (targetVal !== undefined) {
-          // Property is animated in this step
-          // Check if spring or timing
-          // For now, default to timing unless 'elastic' or 'bounce' implies spring?
-          // The schema uses 'easing', so we stick to withTiming + Easing or withSpring.
-          // Reanimated's withSpring doesn't take standard easing functions easily, it uses mass/stiffness.
-          // We will stick to `withTiming` with Easing for consistency with GSAP unless specifically requested.
-
-          if (step.easing === 'spring') {
-             // Basic spring if requested (though not in our type yet, we can add it or just use elastic easing)
-             sequence.push(withSpring(targetVal as number)); // Cast for now
-          } else {
-             sequence.push(withTiming(targetVal as number, { duration, easing }));
+          if (step.easing === 'spring' && typeof targetVal === 'number') {
+            sequence.push(withSpring(targetVal));
+          } else if (typeof targetVal === 'number' || typeof targetVal === 'string') {
+            if (targetVal === 'auto') {
+              sequence.push(withDelay(duration, withTiming(targetVal as any, { duration: 0 })));
+            } else {
+              sequence.push(withTiming(targetVal as any, { duration, easing }));
+            }
           }
           currentVal = targetVal;
         } else {
-          // Property is NOT animated in this step.
-          // It must wait (maintain current value) for the duration of the step.
-          // This ensures synchronization with other properties.
-          sequence.push(withTiming(currentVal as number, { duration, easing: Easing.linear }));
+          if (typeof currentVal === 'number') {
+            sequence.push(withTiming(currentVal, { duration, easing: Easing.linear }));
+          } else {
+            sequence.push(withDelay(duration, withTiming(currentVal as any, { duration: 0 })));
+          }
         }
       });
 
       // 4. Apply Loop / Yoyo
-      let finalAnim;
       if (sequence.length > 0) {
-        // @ts-ignore
-        finalAnim = withSequence(...sequence);
+        let finalAnim = sequence.length === 1 ? sequence[0] : withSequence(...sequence);
 
         if (schema.loop) {
           const loops = typeof schema.loop === 'number' ? schema.loop : -1;
@@ -124,6 +119,8 @@ export const ReanimatedDriver: React.FC<ReanimatedDriverProps> = ({ schema, chil
           finalAnim = withRepeat(finalAnim, loops, reverse);
         }
 
+        // Reset and restart
+        sv.value = initialVal;
         sv.value = finalAnim;
       }
     });
