@@ -86,26 +86,36 @@ export const ReanimatedDriver: React.FC<ReanimatedDriverProps> = ({ schema, chil
 
       schema.steps.forEach(step => {
         const duration = step.duration ?? 500;
+        const delay = step.delay ?? 0;
         const easing = getEasing(step.easing);
         const targetVal = step.to[key as keyof AnimationProperties];
 
+        let anim;
+
         if (targetVal !== undefined) {
           if (step.easing === 'spring' && typeof targetVal === 'number') {
-            sequence.push(withSpring(targetVal));
+            anim = withSpring(targetVal);
           } else if (typeof targetVal === 'number' || typeof targetVal === 'string') {
             if (targetVal === 'auto') {
-              sequence.push(withDelay(duration, withTiming(targetVal as any, { duration: 0 })));
+              anim = withDelay(duration, withTiming(targetVal as any, { duration: 0 }));
             } else {
-              sequence.push(withTiming(targetVal as any, { duration, easing }));
+              anim = withTiming(targetVal as any, { duration, easing });
             }
           }
           currentVal = targetVal;
         } else {
           if (typeof currentVal === 'number') {
-            sequence.push(withTiming(currentVal, { duration, easing: Easing.linear }));
+            anim = withTiming(currentVal, { duration, easing: Easing.linear });
           } else {
-            sequence.push(withDelay(duration, withTiming(currentVal as any, { duration: 0 })));
+            anim = withDelay(duration, withTiming(currentVal as any, { duration: 0 }));
           }
+        }
+
+        if (anim) {
+          if (delay > 0) {
+            anim = withDelay(delay, anim);
+          }
+          sequence.push(anim);
         }
       });
 
