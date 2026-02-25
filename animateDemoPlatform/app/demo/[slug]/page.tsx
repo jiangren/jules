@@ -6,6 +6,13 @@ import { useParams, useRouter } from 'next/navigation';
 import { UniversalAnimator } from '../../../src/components/UniversalAnimator';
 import { DemoAnimations } from '../../../src/demos/animations';
 import { AnimationSchema } from '../../../src/types/AnimationSchema';
+import { RedPacketDemo } from '../../../src/demos/components/RedPacketDemo';
+import { SequentialJumpingDemo } from '../../../src/demos/components/SequentialJumpingDemo';
+
+const CUSTOM_DEMOS: Record<string, React.FC<{ engine: 'reanimated' | 'gsap' }>> = {
+  'red-packet': RedPacketDemo,
+  'sequential-jumping': SequentialJumpingDemo,
+};
 
 export default function DemoPage() {
   const params = useParams();
@@ -25,6 +32,7 @@ export default function DemoPage() {
   );
 
   const currentSchema: AnimationSchema | undefined = demoKey ? DemoAnimations[demoKey as keyof typeof DemoAnimations] : undefined;
+  const CustomComponent = slug ? CUSTOM_DEMOS[slug] : undefined;
 
   const restart = () => setRemountKey(prev => prev + 1);
 
@@ -62,32 +70,40 @@ export default function DemoPage() {
           <View style={styles.demoWrapper}>
             <Text style={styles.engineLabel}>Reanimated</Text>
             <View style={styles.canvas}>
-              <UniversalAnimator
-                key={`reanimated-${slug}-${remountKey}`}
-                engine="reanimated"
-                schema={currentSchema}
-              >
-                <View style={styles.box} />
-              </UniversalAnimator>
+              {CustomComponent ? (
+                <CustomComponent key={`reanimated-${slug}-${remountKey}`} engine="reanimated" />
+              ) : (
+                <UniversalAnimator
+                  key={`reanimated-${slug}-${remountKey}`}
+                  engine="reanimated"
+                  schema={currentSchema}
+                >
+                  <View style={styles.box} />
+                </UniversalAnimator>
+              )}
             </View>
           </View>
 
           <View style={styles.demoWrapper}>
             <Text style={styles.engineLabel}>GSAP</Text>
             <View style={styles.canvas}>
-              <UniversalAnimator
-                key={`gsap-${slug}-${remountKey}`}
-                engine="gsap"
-                schema={currentSchema}
-              >
-                <View style={[styles.box, { backgroundColor: '#FF5252' }]} />
-              </UniversalAnimator>
+              {CustomComponent ? (
+                <CustomComponent key={`gsap-${slug}-${remountKey}`} engine="gsap" />
+              ) : (
+                <UniversalAnimator
+                  key={`gsap-${slug}-${remountKey}`}
+                  engine="gsap"
+                  schema={currentSchema}
+                >
+                  <View style={[styles.box, { backgroundColor: '#FF5252' }]} />
+                </UniversalAnimator>
+              )}
             </View>
           </View>
         </View>
 
         <View style={styles.codeSection}>
-          <Text style={styles.codeTitle}>JSON Schema</Text>
+          <Text style={styles.codeTitle}>JSON Schema {CustomComponent ? '(Base/Partial)' : ''}</Text>
           <View style={styles.codeBlock}>
             <Text style={styles.code}>
               {JSON.stringify(currentSchema, null, 2)}
@@ -167,7 +183,7 @@ const styles = StyleSheet.create({
   },
   demoWrapper: {
     alignItems: 'center',
-    width: 160,
+    width: 300, // Increased width
   },
   engineLabel: {
     fontSize: 16,
@@ -176,8 +192,8 @@ const styles = StyleSheet.create({
     color: '#444',
   },
   canvas: {
-    width: 160,
-    height: 160,
+    width: 300, // Increased size
+    height: 300, // Increased size
     backgroundColor: '#fff',
     borderRadius: 12,
     justifyContent: 'center',

@@ -46,10 +46,40 @@ export const PulseSchema: AnimationSchema = {
   yoyo: true
 };
 
+// --- New Demos ---
+
+export const RedPacketLidSchema: AnimationSchema = {
+  initial: { rotateX: '0deg' },
+  steps: [
+    { to: { rotateX: '180deg' }, duration: 600, easing: 'ease-in-out' }
+  ],
+  loop: false
+};
+
+export const RedPacketCoinSchema: AnimationSchema = {
+  initial: { y: 20, opacity: 0, scale: 0.5 },
+  steps: [
+    { to: { y: -100, opacity: 1, scale: 1.2 }, duration: 800, delay: 400, easing: 'spring' }
+  ],
+  loop: false
+};
+
+export const JumpingDotSchema: AnimationSchema = {
+  initial: { y: 0 },
+  steps: [
+    { to: { y: -25 }, duration: 300, easing: 'ease-out' },
+    { to: { y: 0 }, duration: 300, easing: 'ease-in' },
+    { to: { y: 0 }, duration: 200 } // pause
+  ],
+  loop: true
+};
+
 export const DemoAnimations = {
   'Marketing Modal': MarketingModalSchema,
   'Floating Badge': FloatingBadgeSchema,
   'Fade In Up': FadeInUpSchema,
   'Shake': ShakeSchema,
-  'Pulse': PulseSchema
+  'Pulse': PulseSchema,
+  'Red Packet': RedPacketLidSchema, // Placeholder, custom component will handle details
+  'Sequential Jumping': JumpingDotSchema // Placeholder
 };
