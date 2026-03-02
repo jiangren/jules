@@ -20,6 +20,7 @@ const Layout = ({ children }) => {
     { id: 8, path: '/demo/8', title: 'Success/Confetti' },
     { id: 9, path: '/demo/9', title: 'Sticky/Hide Header' },
     { id: 10, path: '/demo/10', title: 'Like/Favorite' },
+    { id: 11, path: '/demo/11', title: 'Rolling Numbers' },
   ];
 
   return (

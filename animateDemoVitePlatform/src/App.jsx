@@ -13,6 +13,7 @@ import { ReanimatedCounter, GsapCounter } from './demos/Demo7_CounterNumbers';
 import { ReanimatedConfetti, GsapConfetti } from './demos/Demo8_SuccessConfetti';
 import { ReanimatedSticky, GsapSticky } from './demos/Demo9_StickyHeader';
 import { ReanimatedLike, GsapLike } from './demos/Demo10_LikeButton';
+import { ReanimatedRollingCounter, GsapRollingCounter } from './demos/Demo11_RollingNumbers';
 
 function Home() {
   return (
@@ -94,6 +95,13 @@ function App() {
       desc: 'Micro-interaction with scale bounce.',
       reanimated: ReanimatedLike,
       gsap: GsapLike
+    },
+    {
+      id: 11,
+      title: 'Rolling Numbers',
+      desc: 'Vertical odometer-style digit rolling.',
+      reanimated: ReanimatedRollingCounter,
+      gsap: GsapRollingCounter
     },
   ];
 
