@@ -3,7 +3,9 @@ import Animated, {
   useSharedValue,
   useAnimatedProps,
   withTiming,
-  Easing
+  Easing,
+  useAnimatedReaction,
+  runOnJS
 } from 'react-native-reanimated';
 import { View, Text, TextInput, StyleSheet } from 'react-native-web';
 import { gsap } from 'gsap';
@@ -49,11 +51,11 @@ const ReText = ({ text, style }) => {
 
   // We use useAnimatedReaction to update state on JS thread
   // This is less performant than native Text binding but works on Web
-  Animated.useAnimatedReaction(
+  useAnimatedReaction(
     () => Math.round(text.value),
     (result, previous) => {
       if (result !== previous) {
-        Animated.runOnJS(setDisplayedText)(`${result}`);
+        runOnJS(setDisplayedText)(`${result}`);
       }
     },
     [text]

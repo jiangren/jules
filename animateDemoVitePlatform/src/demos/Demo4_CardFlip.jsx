@@ -14,24 +14,21 @@ export const ReanimatedFlip = () => {
   const rotation = useSharedValue(0);
 
   const flip = () => {
-    rotation.value = withSpring(rotation.value ? 0 : 180, { damping: 12 });
+    rotation.value = withSpring(rotation.value === 0 ? 180 : 0, { damping: 12 });
   };
 
   const frontAnimatedStyle = useAnimatedStyle(() => {
-    const rotateY = interpolate(rotation.value, [0, 180], [0, 180]);
     return {
-      transform: [{ rotateY: `${rotateY}deg` }],
-      opacity: rotateY > 90 ? 0 : 1,
-      zIndex: rotateY > 90 ? 0 : 1,
+      transform: [{ perspective: 1000 }, { rotateY: `${rotation.value}deg` }],
+      // Use opacity as a fallback for backface-visibility
+      opacity: rotation.value > 90 ? 0 : 1,
     };
   });
 
   const backAnimatedStyle = useAnimatedStyle(() => {
-    const rotateY = interpolate(rotation.value, [0, 180], [180, 360]);
     return {
-      transform: [{ rotateY: `${rotateY}deg` }],
-      opacity: rotateY > 270 ? 0 : 1,
-      zIndex: rotateY > 270 ? 0 : 1,
+      transform: [{ perspective: 1000 }, { rotateY: `${rotation.value + 180}deg` }],
+      opacity: rotation.value > 90 ? 1 : 0,
     };
   });
 

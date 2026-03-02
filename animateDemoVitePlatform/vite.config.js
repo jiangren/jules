@@ -17,6 +17,11 @@ export default defineConfig({
   },
   define: {
     global: 'window',
+    process: {
+      env: {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+      },
+    },
     __DEV__: process.env.NODE_ENV !== 'production',
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
     'require': '(() => undefined)', // Mock require for some poorly behaved packages on web
