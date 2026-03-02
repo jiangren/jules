@@ -13,6 +13,7 @@ module.exports = {
   resolve: {
     alias: {
       'react-native$': 'react-native-web',
+      'events': path.resolve(__dirname, 'src/shims/events.js'),
     },
     extensions: ['.web.js', '.web.jsx', '.web.ts', '.web.tsx', '.js', '.jsx', '.json'],
   },
@@ -53,7 +54,7 @@ module.exports = {
     new webpack.DefinePlugin({
       __DEV__: JSON.stringify(process.env.NODE_ENV !== 'production'),
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-      'require': '(() => undefined)', // Mock require for web as in Vite
+      'process': JSON.stringify({ env: {} }), // Fix missing process object in browser
     }),
   ],
   devServer: {
