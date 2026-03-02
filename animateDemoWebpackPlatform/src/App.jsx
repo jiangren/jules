@@ -35,6 +35,7 @@ import { ReanimatedCart, GsapCart } from './demos/complex/Demo22_Cart';
 import { ReanimatedReward, GsapReward } from './demos/complex/Demo23_Reward';
 import { ReanimatedSubmit, GsapSubmit } from './demos/complex/Demo24_FormSubmit';
 import { ReanimatedToast, GsapToast } from './demos/complex/Demo25_Toast';
+import { ReanimatedExchange, GsapExchange } from './demos/complex/Demo26_Exchange';
 
 function App() {
   const categories = [
@@ -77,6 +78,7 @@ function App() {
         { id: 24, path: '/timeline-sequences/24', title: 'Reward Unlock', desc: 'Loot box opening sequence.', reanimated: ReanimatedReward, gsap: GsapReward },
         { id: 25, path: '/timeline-sequences/25', title: 'Form Submit', desc: 'Button to loading to success morph.', reanimated: ReanimatedSubmit, gsap: GsapSubmit },
         { id: 26, path: '/timeline-sequences/26', title: 'Toast Notification', desc: 'Enter, countdown, exit sequence.', reanimated: ReanimatedToast, gsap: GsapToast },
+        { id: 27, path: '/timeline-sequences/27', title: 'Currency Exchange', desc: 'Modal with sliding blocks, arrows, and shimmer effects.', reanimated: ReanimatedExchange, gsap: GsapExchange },
       ]
     }
   ];
