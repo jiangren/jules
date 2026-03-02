@@ -1,4 +1,3 @@
-// Workaround for Reanimated v3.x Web Build Issue in Vite
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
@@ -24,6 +23,8 @@ export default defineConfig({
       },
     },
     __DEV__: process.env.NODE_ENV !== 'production',
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+    'require': '(() => undefined)', // Mock require for some poorly behaved packages on web
   },
   optimizeDeps: {
     esbuildOptions: {
@@ -34,7 +35,4 @@ export default defineConfig({
     },
     include: ['react-native-reanimated', 'react-native-web'],
   },
-  // the manual esbuild transformation plugin causes problems with standard React resolution
-  // Let's rely on dev server working, and accept that standard vite build might need more specific RN-Web loader configuration that isn't trivial.
-  // We'll remove the broken plugin and just leave standard setup, as dev works perfectly.
 });

@@ -2,26 +2,12 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from '../styles/Layout.module.css';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, categories }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
-
-  const demos = [
-    { id: 1, path: '/demo/1', title: 'Hero Entrance' },
-    { id: 2, path: '/demo/2', title: 'Pulse/Heartbeat' },
-    { id: 3, path: '/demo/3', title: 'Infinite Marquee' },
-    { id: 4, path: '/demo/4', title: 'Card Flip' },
-    { id: 5, path: '/demo/5', title: 'Floating Elements' },
-    { id: 6, path: '/demo/6', title: 'Pop-up/Modal' },
-    { id: 7, path: '/demo/7', title: 'Counter/Numbers' },
-    { id: 8, path: '/demo/8', title: 'Success/Confetti' },
-    { id: 9, path: '/demo/9', title: 'Sticky/Hide Header' },
-    { id: 10, path: '/demo/10', title: 'Like/Favorite' },
-    { id: 11, path: '/demo/11', title: 'Rolling Numbers' },
-  ];
 
   return (
     <div className={styles.container}>
@@ -40,32 +26,42 @@ const Layout = ({ children }) => {
           </p>
         </div>
         <nav className={styles.nav}>
-          <ul className={styles.navList}>
-            <li className={styles.navItem}>
-              <NavLink
-                to="/"
-                className={({ isActive }) =>
-                  isActive ? `${styles.navLink} ${styles.activeLink}` : styles.navLink
-                }
-                onClick={() => setIsSidebarOpen(false)}
-              >
-                Home
-              </NavLink>
-            </li>
-            {demos.map((demo) => (
-              <li key={demo.id} className={styles.navItem}>
+          <div className={styles.navGroup}>
+            <ul className={styles.navList}>
+              <li className={styles.navItem}>
                 <NavLink
-                  to={demo.path}
+                  to="/"
                   className={({ isActive }) =>
                     isActive ? `${styles.navLink} ${styles.activeLink}` : styles.navLink
                   }
                   onClick={() => setIsSidebarOpen(false)}
                 >
-                  {demo.id}. {demo.title}
+                  Home
                 </NavLink>
               </li>
-            ))}
-          </ul>
+            </ul>
+          </div>
+
+          {categories.map((category, index) => (
+            <div key={index} className={styles.navGroup}>
+              <div className={styles.groupTitle}>{category.name}</div>
+              <ul className={styles.navList}>
+                {category.demos.map((demo) => (
+                  <li key={demo.id} className={styles.navItem}>
+                    <NavLink
+                      to={demo.path}
+                      className={({ isActive }) =>
+                        isActive ? `${styles.navLink} ${styles.activeLink}` : styles.navLink
+                      }
+                      onClick={() => setIsSidebarOpen(false)}
+                    >
+                      {demo.id}. {demo.title}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </nav>
       </aside>
 
