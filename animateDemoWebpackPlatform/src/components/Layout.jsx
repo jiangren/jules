@@ -4,9 +4,17 @@ import styles from '../styles/Layout.module.css';
 
 const Layout = ({ children, categories }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [collapsedGroups, setCollapsedGroups] = useState({});
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const toggleGroup = (name) => {
+    setCollapsedGroups(prev => ({
+      ...prev,
+      [name]: !prev[name]
+    }));
   };
 
   return (
@@ -42,26 +50,37 @@ const Layout = ({ children, categories }) => {
             </ul>
           </div>
 
-          {categories.map((category, index) => (
-            <div key={index} className={styles.navGroup}>
-              <div className={styles.groupTitle}>{category.name}</div>
-              <ul className={styles.navList}>
-                {category.demos.map((demo) => (
-                  <li key={demo.id} className={styles.navItem}>
-                    <NavLink
-                      to={demo.path}
-                      className={({ isActive }) =>
-                        isActive ? `${styles.navLink} ${styles.activeLink}` : styles.navLink
-                      }
-                      onClick={() => setIsSidebarOpen(false)}
-                    >
-                      {demo.id}. {demo.title}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {categories.map((category, index) => {
+            const isCollapsed = collapsedGroups[category.name];
+            return (
+              <div key={index} className={styles.navGroup}>
+                <button
+                  className={styles.groupHeader}
+                  onClick={() => toggleGroup(category.name)}
+                >
+                  <span className={styles.groupTitle}>{category.name}</span>
+                  <span className={`${styles.chevron} ${isCollapsed ? styles.chevronCollapsed : ''}`}>
+                    ▼
+                  </span>
+                </button>
+                <ul className={`${styles.navList} ${isCollapsed ? styles.navListCollapsed : ''}`}>
+                  {category.demos.map((demo) => (
+                    <li key={demo.id} className={styles.navItem}>
+                      <NavLink
+                        to={demo.path}
+                        className={({ isActive }) =>
+                          isActive ? `${styles.navLink} ${styles.activeLink}` : styles.navLink
+                        }
+                        onClick={() => setIsSidebarOpen(false)}
+                      >
+                        {demo.id}. {demo.title}
+                      </NavLink>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
         </nav>
       </aside>
 

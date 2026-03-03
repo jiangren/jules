@@ -20,30 +20,43 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules\/(?!react-native-reanimated|react-native-web)/,
-        use: {
-          loader: 'babel-loader',
-        },
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
+        oneOf: [
+          // 1. Raw source loading (matched first)
           {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                auto: true, // Automatically enable css modules for files matching `*.module.*`
-                localIdentName: '[name]__[local]--[hash:base64:5]',
-              },
+            test: /\.jsx?$/,
+            resourceQuery: /original/,
+            type: 'asset/source',
+          },
+          // 2. Standard JS/JSX compilation
+          {
+            test: /\.(js|jsx)$/,
+            exclude: /node_modules\/(?!react-native-reanimated|react-native-web)/,
+            use: {
+              loader: 'babel-loader',
             },
           },
-        ],
-      },
-      {
-        test: /\.(png|jpe?g|gif|svg)$/i,
-        type: 'asset/resource',
+          // 3. CSS
+          {
+            test: /\.css$/,
+            use: [
+              'style-loader',
+              {
+                loader: 'css-loader',
+                options: {
+                  modules: {
+                    auto: true,
+                    localIdentName: '[name]__[local]--[hash:base64:5]',
+                  },
+                },
+              },
+            ],
+          },
+          // 4. Assets
+          {
+            test: /\.(png|svg|jpg|jpeg|gif)$/i,
+            type: 'asset/resource',
+          },
+        ]
       },
     ],
   },

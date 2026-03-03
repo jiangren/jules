@@ -10,7 +10,8 @@
   border-right: 1px solid #e1e4e8;
   display: flex;
   flex-direction: column;
-  position: fixed; /* Changed to fixed for better mobile behavior */
+  position: fixed;
+  /* Changed to fixed for better mobile behavior */
   top: 0;
   bottom: 0;
   left: 0;
@@ -43,20 +44,56 @@
   margin-bottom: 24px;
 }
 
+.navList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  max-height: 2000px;
+  /* Fallback for expanded state */
+}
+
+.navListCollapsed {
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.groupHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 8px;
+  outline: none;
+}
+
+.groupHeader:hover .groupTitle {
+  color: #4a5568;
+}
+
 .groupTitle {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: #a0aec0;
   font-weight: 700;
-  padding: 0 24px;
-  margin-bottom: 8px;
+  transition: color 0.2s;
 }
 
-.navList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.chevron {
+  font-size: 0.6rem;
+  color: #a0aec0;
+  transition: transform 0.3s ease;
+}
+
+.chevronCollapsed {
+  transform: rotate(-90deg);
 }
 
 .navItem {
@@ -81,7 +118,8 @@
 .activeLink {
   background-color: #ebf4ff;
   color: #5a67d8;
-  border-left: 3px solid #5a67d8; /* Fixed border-left-color syntax */
+  border-left: 3px solid #5a67d8;
+  /* Fixed border-left-color syntax */
   font-weight: 600;
 }
 
@@ -89,12 +127,14 @@
   flex: 1;
   padding: 40px;
   max-width: 1400px;
-  margin-left: 260px; /* Offset for fixed sidebar */
+  margin-left: 260px;
+  /* Offset for fixed sidebar */
   width: calc(100% - 260px);
 }
 
 .mobileToggle {
-  display: none; /* Hidden on desktop */
+  display: none;
+  /* Hidden on desktop */
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -105,7 +145,7 @@
   width: 50px;
   height: 50px;
   z-index: 1000;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   font-size: 1.5rem;
   align-items: center;

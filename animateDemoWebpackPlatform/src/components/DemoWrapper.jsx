@@ -1,8 +1,25 @@
 import React, { useState } from 'react';
 import styles from '../styles/DemoWrapper.module.css';
+import { extractComponentCode } from '../utils/codeUtils';
 
-const DemoWrapper = ({ title, description, ReanimatedComponent, GsapComponent }) => {
+const DemoWrapper = ({ title, description, ReanimatedComponent, GsapComponent, rawCode }) => {
   const [viewMode, setViewMode] = useState('split'); // 'split', 'reanimated', 'gsap'
+  const [showCodeReanimated, setShowCodeReanimated] = useState(false);
+  const [showCodeGsap, setShowCodeGsap] = useState(false);
+  const [copyStatus, setCopyStatus] = useState('');
+
+  const reanimatedName = ReanimatedComponent?.displayName || ReanimatedComponent?.name;
+  const gsapName = GsapComponent?.displayName || GsapComponent?.name;
+
+  const reanimatedCode = extractComponentCode(rawCode, reanimatedName);
+  const gsapCode = extractComponentCode(rawCode, gsapName);
+
+  const handleCopy = (code, type) => {
+    navigator.clipboard.writeText(code).then(() => {
+      setCopyStatus(type);
+      setTimeout(() => setCopyStatus(''), 2000);
+    });
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -43,10 +60,27 @@ const DemoWrapper = ({ title, description, ReanimatedComponent, GsapComponent })
                 <span className={`${styles.badge} ${styles.reanimatedBadge}`}>RN Reanimated v3</span>
                 Implementation
               </h3>
+              <button
+                className={styles.codeToggle}
+                onClick={() => setShowCodeReanimated(!showCodeReanimated)}
+              >
+                {showCodeReanimated ? 'Hide Code' : 'View Code'}
+              </button>
             </div>
             <div className={styles.canvas}>
               {ReanimatedComponent && <ReanimatedComponent />}
             </div>
+            {showCodeReanimated && (
+              <div className={styles.codeSection}>
+                <div className={styles.codeHeader}>
+                  <span>Source Code</span>
+                  <button onClick={() => handleCopy(reanimatedCode, 'reanimated')} className={styles.copyBtn}>
+                    {copyStatus === 'reanimated' ? '✅ Copied!' : 'Copy Code'}
+                  </button>
+                </div>
+                <pre className={styles.pre}><code>{reanimatedCode}</code></pre>
+              </div>
+            )}
           </div>
         )}
 
@@ -58,10 +92,27 @@ const DemoWrapper = ({ title, description, ReanimatedComponent, GsapComponent })
                 <span className={`${styles.badge} ${styles.gsapBadge}`}>GSAP</span>
                 Implementation
               </h3>
+              <button
+                className={styles.codeToggle}
+                onClick={() => setShowCodeGsap(!showCodeGsap)}
+              >
+                {showCodeGsap ? 'Hide Code' : 'View Code'}
+              </button>
             </div>
             <div className={styles.canvas}>
               {GsapComponent && <GsapComponent />}
             </div>
+            {showCodeGsap && (
+              <div className={styles.codeSection}>
+                <div className={styles.codeHeader}>
+                  <span>Source Code</span>
+                  <button onClick={() => handleCopy(gsapCode, 'gsap')} className={styles.copyBtn}>
+                    {copyStatus === 'gsap' ? '✅ Copied!' : 'Copy Code'}
+                  </button>
+                </div>
+                <pre className={styles.pre}><code>{gsapCode}</code></pre>
+              </div>
+            )}
           </div>
         )}
 

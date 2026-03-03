@@ -42,7 +42,7 @@
 .activeControl {
   background: #ffffff;
   color: #4a5568;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .demoContainer {
@@ -110,6 +110,71 @@
   /* Pattern background for visibility */
   background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
   background-size: 20px 20px;
+}
+
+.codeToggle {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  background: #edf2f7;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  color: #4a5568;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.codeToggle:hover {
+  background: #e2e8f0;
+  color: #2d3748;
+}
+
+.codeSection {
+  background: #1a202c;
+  border-top: 1px solid #2d3748;
+  color: #e2e8f0;
+}
+
+.codeHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background: #2d3748;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #a0aec0;
+}
+
+.pre {
+  margin: 0;
+  padding: 16px;
+  max-height: 300px;
+  overflow: auto;
+  font-family: 'Fira Code', 'Courier New', Courier, monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  background: #1a202c;
+}
+
+.pre code {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.copyBtn {
+  padding: 4px 8px;
+  background: #4a5568;
+  border: 1px solid #718096;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.copyBtn:hover {
+  background: #2d3748;
 }
 
 @media (max-width: 1024px) {
