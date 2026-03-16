@@ -8,6 +8,7 @@ const TARGET_SIZE = 40;
 const GAME_DURATION = 30; // seconds
 
 const TiltGame = () => {
+  const [isMobile, setIsMobile] = useState(true);
   const [permissionGranted, setPermissionGranted] = useState(false);
   const [needsPermission, setNeedsPermission] = useState(false);
   const [gameState, setGameState] = useState('START'); // START, PLAYING, END
@@ -26,6 +27,10 @@ const TiltGame = () => {
   const tiltRef = useRef({ gamma: 0, beta: 0 });
 
   useEffect(() => {
+    // Check if user is in mobile H5 environment
+    const checkMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    setIsMobile(checkMobile);
+
     // Check if permission is needed for iOS 13+
     if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
       setNeedsPermission(true);
@@ -193,22 +198,6 @@ const TiltGame = () => {
     return () => cancelAnimationFrame(requestRef.current);
   }, [gameState, targetPos]);
 
-  // For PC debugging, simulate tilt with mouse
-  const handleMouseMove = (e) => {
-    if (gameState !== 'PLAYING' || !containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-
-    tiltRef.current = {
-      gamma: (mouseX - centerX) / 10,
-      beta: (mouseY - centerY) / 10
-    };
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -222,13 +211,19 @@ const TiltGame = () => {
       <div
         className={styles.gameArea}
         ref={containerRef}
-        onMouseMove={handleMouseMove}
         onTouchMove={(e) => {
           // Prevent scrolling while playing
           e.preventDefault();
         }}
       >
-        {needsPermission && !permissionGranted && gameState === 'START' && (
+        {!isMobile && (
+          <div className={styles.overlay}>
+            <h2>H5 专属游戏</h2>
+            <p>为了获得最佳体验，请在手机浏览器（H5环境）中打开此游戏并使用重力感应。</p>
+          </div>
+        )}
+
+        {isMobile && needsPermission && !permissionGranted && gameState === 'START' && (
           <div className={styles.overlay}>
             <button className={styles.button} onClick={requestPermission}>
               允许陀螺仪权限
@@ -236,7 +231,7 @@ const TiltGame = () => {
           </div>
         )}
 
-        {permissionGranted && gameState === 'START' && (
+        {isMobile && permissionGranted && gameState === 'START' && (
           <div className={styles.overlay}>
             <h2>重力收集</h2>
             <p>倾斜手机控制小球收集目标！</p>
