@@ -10,6 +10,9 @@ const Home = () => {
         <Link to="/shake" className={styles.linkButton}>
           进入“摇一摇”游戏
         </Link>
+        <Link to="/tilt" className={styles.linkButton} style={{ marginTop: '16px' }}>
+          进入“重力收集”游戏
+        </Link>
       </div>
     </div>
   );
