@@ -3,12 +3,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-  entry: './src/main.jsx',
+  entry: ['./src/env.js', './src/main.jsx'],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
     publicPath: '/',
-    clean: true,
   },
   resolve: {
     alias: {
@@ -25,14 +24,23 @@ module.exports = {
           {
             test: /\.jsx?$/,
             resourceQuery: /original/,
-            type: 'asset/source',
+            use: 'raw-loader',
           },
-          // 2. Standard JS/JSX compilation
+          // 2. Standard JS/JSX compilation (including problematic node_modules)
           {
             test: /\.(js|jsx)$/,
-            exclude: /node_modules\/(?!react-native-reanimated|react-native-web)/,
+            exclude: /node_modules\/(?!react-native-reanimated|react-native-web|culori)/,
             use: {
               loader: 'babel-loader',
+              options: {
+                presets: [
+                  ['@babel/preset-env', { targets: { chrome: '58' } }],
+                  ['@babel/preset-react', { runtime: 'automatic' }]
+                ],
+                plugins: [
+                  'react-native-reanimated/plugin'
+                ]
+              }
             },
           },
           // 3. CSS
@@ -44,7 +52,6 @@ module.exports = {
                 loader: 'css-loader',
                 options: {
                   modules: {
-                    auto: true,
                     localIdentName: '[name]__[local]--[hash:base64:5]',
                   },
                 },
@@ -54,7 +61,14 @@ module.exports = {
           // 4. Assets
           {
             test: /\.(png|svg|jpg|jpeg|gif)$/i,
-            type: 'asset/resource',
+            use: [
+              {
+                loader: 'file-loader',
+                options: {
+                  name: '[path][name].[ext]',
+                },
+              },
+            ],
           },
         ]
       },
@@ -65,15 +79,10 @@ module.exports = {
       template: './public/index.html',
     }),
     new webpack.DefinePlugin({
-      __DEV__: JSON.stringify(process.env.NODE_ENV !== 'production'),
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-      'process': JSON.stringify({ env: {} }), // Fix missing process object in browser
     }),
   ],
   devServer: {
-    static: {
-      directory: path.join(__dirname, 'public'),
-    },
     historyApiFallback: true,
     port: 3000,
     hot: true,

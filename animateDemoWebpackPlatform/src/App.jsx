@@ -36,6 +36,7 @@ import { ReanimatedReward, GsapReward } from './demos/complex/Demo23_Reward';
 import { ReanimatedSubmit, GsapSubmit } from './demos/complex/Demo24_FormSubmit';
 import { ReanimatedToast, GsapToast } from './demos/complex/Demo25_Toast';
 import { ReanimatedExchange, GsapExchange } from './demos/complex/Demo26_Exchange';
+import { ReanimatedVipPromo, GsapVipPromo } from './demos/complex/Demo27_VipPromo';
 
 // Raw Code Imports
 import heroRaw from './demos/Demo1_HeroEntrance.jsx?original';
@@ -57,6 +58,7 @@ import rewardRaw from './demos/complex/Demo23_Reward.jsx?original';
 import submitRaw from './demos/complex/Demo24_FormSubmit.jsx?original';
 import toastRaw from './demos/complex/Demo25_Toast.jsx?original';
 import exchangeRaw from './demos/complex/Demo26_Exchange.jsx?original';
+import vipPromoRaw from './demos/complex/Demo27_VipPromo.jsx?original';
 
 function App() {
   const categories = [
@@ -100,6 +102,7 @@ function App() {
         { id: 25, path: '/timeline-sequences/25', title: 'Form Submit', desc: 'Button to loading to success morph.', reanimated: ReanimatedSubmit, gsap: GsapSubmit, rawCode: submitRaw },
         { id: 26, path: '/timeline-sequences/26', title: 'Toast Notification', desc: 'Enter, countdown, exit sequence.', reanimated: ReanimatedToast, gsap: GsapToast, rawCode: toastRaw },
         { id: 27, path: '/timeline-sequences/27', title: 'Currency Exchange', desc: 'Modal with sliding blocks, arrows, and shimmer effects.', reanimated: ReanimatedExchange, gsap: GsapExchange, rawCode: exchangeRaw },
+        { id: 28, path: '/timeline-sequences/28', title: 'VIP Promo Popup', desc: 'VIP promotional popup with cascading price reveals and particle effects.', reanimated: ReanimatedVipPromo, gsap: GsapVipPromo, rawCode: vipPromoRaw },
       ]
     }
   ];
