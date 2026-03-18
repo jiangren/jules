@@ -13,6 +13,12 @@ const Home = () => {
         <Link to="/rollball" className={styles.linkButton}>
           进入“平衡滚球”游戏
         </Link>
+        <Link to="/catch" className={styles.linkButton} style={{ marginTop: '15px' }}>
+          进入“重力接球”游戏
+        </Link>
+        <Link to="/orientation" className={`${styles.linkButton} ${styles.greenButton}`}>
+          进入“重力感应滚球”游戏
+        </Link>
       </div>
     </div>
   );
