@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import ShakeGame from './pages/ShakeGame';
 import GravityGame from './pages/GravityGame';
+import RollBallGame from './pages/RollBallGame';
+import CatchGame from './pages/CatchGame';
+import OrientationGame from './pages/OrientationGame';
 
 const App = () => {
   return (
@@ -11,6 +14,9 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/shake" element={<ShakeGame />} />
         <Route path="/gravity" element={<GravityGame />} />
+        <Route path="/rollball" element={<RollBallGame />} />
+        <Route path="/catch" element={<CatchGame />} />
+        <Route path="/orientation" element={<OrientationGame />} />
       </Routes>
     </Router>
   );
