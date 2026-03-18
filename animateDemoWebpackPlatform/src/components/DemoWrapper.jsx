@@ -4,8 +4,7 @@ import { extractComponentCode } from '../utils/codeUtils';
 
 const DemoWrapper = ({ title, description, ReanimatedComponent, GsapComponent, rawCode }) => {
   const [viewMode, setViewMode] = useState('split'); // 'split', 'reanimated', 'gsap'
-  const [showCodeReanimated, setShowCodeReanimated] = useState(false);
-  const [showCodeGsap, setShowCodeGsap] = useState(false);
+  const [showCode, setShowCode] = useState(false);
   const [copyStatus, setCopyStatus] = useState('');
 
   const reanimatedName = ReanimatedComponent?.displayName || ReanimatedComponent?.name;
@@ -47,6 +46,13 @@ const DemoWrapper = ({ title, description, ReanimatedComponent, GsapComponent, r
           >
             Split View
           </button>
+          <button
+            className={`${styles.controlButton} ${showCode ? styles.activeControl : ''}`}
+            onClick={() => setShowCode(!showCode)}
+            style={{ marginLeft: '4px', borderLeft: '1px solid #e2e8f0' }}
+          >
+            {showCode ? 'Hide Code' : 'View Code'}
+          </button>
         </div>
       </header>
 
@@ -60,17 +66,13 @@ const DemoWrapper = ({ title, description, ReanimatedComponent, GsapComponent, r
                 <span className={`${styles.badge} ${styles.reanimatedBadge}`}>RN Reanimated v3</span>
                 Implementation
               </h3>
-              <button
-                className={styles.codeToggle}
-                onClick={() => setShowCodeReanimated(!showCodeReanimated)}
-              >
-                {showCodeReanimated ? 'Hide Code' : 'View Code'}
-              </button>
             </div>
-            <div className={styles.canvas}>
-              {ReanimatedComponent && <ReanimatedComponent />}
-            </div>
-            {showCodeReanimated && (
+
+            {!showCode ? (
+              <div className={styles.canvas}>
+                {ReanimatedComponent && <ReanimatedComponent />}
+              </div>
+            ) : (
               <div className={styles.codeSection}>
                 <div className={styles.codeHeader}>
                   <span>Source Code</span>
@@ -92,17 +94,13 @@ const DemoWrapper = ({ title, description, ReanimatedComponent, GsapComponent, r
                 <span className={`${styles.badge} ${styles.gsapBadge}`}>GSAP</span>
                 Implementation
               </h3>
-              <button
-                className={styles.codeToggle}
-                onClick={() => setShowCodeGsap(!showCodeGsap)}
-              >
-                {showCodeGsap ? 'Hide Code' : 'View Code'}
-              </button>
             </div>
-            <div className={styles.canvas}>
-              {GsapComponent && <GsapComponent />}
-            </div>
-            {showCodeGsap && (
+
+            {!showCode ? (
+              <div className={styles.canvas}>
+                {GsapComponent && <GsapComponent />}
+              </div>
+            ) : (
               <div className={styles.codeSection}>
                 <div className={styles.codeHeader}>
                   <span>Source Code</span>
