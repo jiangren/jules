@@ -10,6 +10,9 @@ const Home = () => {
         <Link to="/shake" className={styles.linkButton}>
           进入“摇一摇”游戏
         </Link>
+        <Link to="/gravity-melody" className={styles.linkButton}>
+          进入“重力音符”游戏
+        </Link>
       </div>
     </div>
   );

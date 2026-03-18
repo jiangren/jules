@@ -1,0 +1,170 @@
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  touch-action: none; /* 防止页面滚动 */
+}
+
+.backButton {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  color: #fff;
+  text-decoration: none;
+  z-index: 100;
+  backdrop-filter: blur(5px);
+  font-size: 14px;
+  transition: all 0.3s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.scoreBoard {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #e94560;
+  text-shadow: 0 0 10px rgba(233, 69, 96, 0.8);
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(233, 69, 96, 0.3);
+}
+
+.gameArea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.ball {
+  position: absolute;
+  width: 10vw;
+  height: 10vw;
+  max-width: 60px;
+  max-height: 60px;
+  min-width: 30px;
+  min-height: 30px;
+  background: radial-gradient(circle at 30% 30%, #fff, #4facfe);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), inset -5px -5px 15px rgba(0,0,0,0.3);
+  z-index: 50;
+  /* 不使用过渡动画，因为JS高频更新会卡顿 */
+}
+
+.star {
+  position: absolute;
+  width: 8vw;
+  height: 8vw;
+  max-width: 40px;
+  max-height: 40px;
+  min-width: 20px;
+  min-height: 20px;
+  color: #f9ca24;
+  font-size: 8vw;
+  line-height: 1;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  text-shadow: 0 0 10px rgba(249, 202, 36, 0.8);
+  z-index: 40;
+  animation: pulse 2s infinite alternate;
+
+  @media (min-width: 500px) {
+    font-size: 40px;
+  }
+}
+
+.collected {
+  /* 收集时的样式，主要依靠GSAP动画 */
+  pointer-events: none;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.9);
+    filter: drop-shadow(0 0 5px rgba(249, 202, 36, 0.5));
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.1);
+    filter: drop-shadow(0 0 15px rgba(249, 202, 36, 1));
+  }
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+  backdrop-filter: blur(5px);
+}
+
+.modal {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+
+  h2 {
+    margin-top: 0;
+    font-size: 28px;
+    color: #4facfe;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: #ccc;
+    margin-bottom: 30px;
+  }
+}
+
+.startButton {
+  padding: 15px 40px;
+  font-size: 18px;
+  background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+  border: none;
+  border-radius: 30px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(79, 172, 254, 0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:active {
+    transform: scale(0.95);
+    box-shadow: 0 5px 10px rgba(79, 172, 254, 0.4);
+  }
+}
+
+.hint {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+  pointer-events: none;
+}
