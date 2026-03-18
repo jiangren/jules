@@ -19,12 +19,20 @@ function extractFrames(videoPath, outputDir, threshold = 0.4) {
 
     console.log(`Starting frame extraction with threshold: ${threshold}`);
 
+    // Clean up existing files in the output directory
+    fs.readdirSync(outputDir).forEach(file => {
+      const filePath = path.join(outputDir, file);
+      if (fs.statSync(filePath).isFile()) {
+        fs.unlinkSync(filePath);
+      }
+    });
+
     // Use select filter to pick frames where scene change score is > threshold.
     // The vsync 0 is to output exactly the selected frames.
     ffmpeg(videoPath)
       .outputOptions([
-        `-vf select='gt(scene,${threshold})'`,
-        '-vsync vfr'
+        '-vf', `select='gt(scene,${threshold})'`,
+        '-vsync', 'vfr'
       ])
       .output(outputPattern)
       .on('start', (commandLine) => {
