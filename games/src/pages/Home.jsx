@@ -22,6 +22,12 @@ const Home = () => {
         <Link to="/orientation" className={`${styles.linkButton} ${styles.greenButton}`}>
           进入“重力感应滚球”游戏
         </Link>
+        <Link to="/compass" className={styles.linkButton} style={{ marginTop: '15px' }}>
+          进入“魔法指南针”游戏
+        </Link>
+        <Link to="/geocache" className={`${styles.linkButton} ${styles.gravityBtn}`} style={{ marginTop: '15px' }}>
+          进入“地理寻宝”游戏
+        </Link>
       </div>
     </div>
   );
