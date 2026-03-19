@@ -6,6 +6,8 @@ import GravityGame from './pages/GravityGame';
 import RollBallGame from './pages/RollBallGame';
 import CatchGame from './pages/CatchGame';
 import OrientationGame from './pages/OrientationGame';
+import CompassGame from './pages/CompassGame';
+import GeoCacheGame from './pages/GeoCacheGame';
 
 const App = () => {
   return (
@@ -17,6 +19,8 @@ const App = () => {
         <Route path="/rollball" element={<RollBallGame />} />
         <Route path="/catch" element={<CatchGame />} />
         <Route path="/orientation" element={<OrientationGame />} />
+        <Route path="/compass" element={<CompassGame />} />
+        <Route path="/geocache" element={<GeoCacheGame />} />
       </Routes>
     </Router>
   );
