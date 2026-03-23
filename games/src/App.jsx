@@ -8,12 +8,14 @@ import CatchGame from './pages/CatchGame';
 import OrientationGame from './pages/OrientationGame';
 import CompassGame from './pages/CompassGame';
 import GeoCacheGame from './pages/GeoCacheGame';
+import LightCatcherGame from './pages/LightCatcherGame';
 
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/lightcatcher" element={<LightCatcherGame />} />
         <Route path="/shake" element={<ShakeGame />} />
         <Route path="/gravity" element={<GravityGame />} />
         <Route path="/rollball" element={<RollBallGame />} />
