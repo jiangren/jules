@@ -28,6 +28,9 @@ const Home = () => {
         <Link to="/geocache" className={`${styles.linkButton} ${styles.gravityBtn}`} style={{ marginTop: '15px' }}>
           进入“地理寻宝”游戏
         </Link>
+        <Link to="/starcatcher" className={`${styles.linkButton} ${styles.gravityBtn}`} style={{ marginTop: '15px', backgroundColor: '#34495e' }}>
+          进入“全景捕星星”游戏
+        </Link>
       </div>
     </div>
   );
