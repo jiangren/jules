@@ -1,0 +1,142 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', sans-serif;
+  color: #333;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.title {
+  font-size: 2.5rem;
+  color: #ff6b6b;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.instructions {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 30px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 10px 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.windmillContainer {
+  position: relative;
+  width: 250px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bladesWrapper {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  z-index: 2;
+  /* Rotation is handled by inline styles in JS */
+}
+
+.blade {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-color: #4ecdc4;
+  border-radius: 0 50px 0 50px;
+  top: 50%;
+  left: 50%;
+  transform-origin: 0 0;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+.blade1 { transform: rotate(0deg); background-color: #ff6b6b; }
+.blade2 { transform: rotate(90deg); background-color: #feca57; }
+.blade3 { transform: rotate(180deg); background-color: #48dbfb; }
+.blade4 { transform: rotate(270deg); background-color: #1dd1a1; }
+
+.centerDot {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.post {
+  width: 20px;
+  height: 150px;
+  background-color: #8395a7;
+  border-radius: 10px 10px 0 0;
+  margin-top: -100px; /* Connect to the center of the blades */
+  z-index: 1;
+}
+
+.controls {
+  margin-top: 40px;
+}
+
+.startButton {
+  background-color: #ff9ff3;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 159, 243, 0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.startButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 159, 243, 0.6);
+}
+
+.startButton:active {
+  transform: translateY(1px);
+}
+
+.volumeMeter {
+  margin-top: 20px;
+  width: 80vw;
+  max-width: 300px;
+  height: 20px;
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid white;
+}
+
+.volumeBar {
+  height: 100%;
+  background: linear-gradient(90deg, #1dd1a1 0%, #ff9ff3 100%);
+  width: 0%;
+  transition: width 0.1s ease-out;
+}
+
+.backLink {
+  margin-top: 30px;
+  color: #ff6b6b;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
