@@ -1,0 +1,151 @@
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 1s ease;
+}
+
+.dayMode {
+  background: linear-gradient(135deg, #87CEEB 0%, #E0F6FF 100%);
+}
+
+.nightMode {
+  background: linear-gradient(135deg, #191970 0%, #000022 100%);
+}
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+.backButton, .toggleButton {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 14px;
+  backdrop-filter: blur(5px);
+  cursor: pointer;
+}
+
+.score {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.overlayText {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 30px;
+}
+
+.startButton {
+  padding: 15px 40px;
+  font-size: 20px;
+  background: #ffcc00;
+  color: #333;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(255, 204, 0, 0.4);
+}
+
+.catcher {
+  position: absolute;
+  bottom: 20px;
+  width: 80px;
+  height: 40px;
+  margin-left: -40px; /* Center horizontally based on left position */
+  border-radius: 10px 10px 30px 30px;
+  transition: background-color 1s ease, box-shadow 1s ease;
+}
+
+.dayCatcher {
+  background: rgba(255, 215, 0, 0.8); /* Gold basket */
+  border: 2px solid #DAA520;
+  box-shadow: 0 5px 15px rgba(218, 165, 32, 0.5);
+}
+
+.nightCatcher {
+  background: rgba(138, 43, 226, 0.8); /* Purple basket */
+  border: 2px solid #4B0082;
+  box-shadow: 0 5px 15px rgba(138, 43, 226, 0.5);
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.sunbeam {
+  background: radial-gradient(circle, #FFFACD 0%, #FFD700 80%, transparent 100%);
+  box-shadow: 0 0 10px #FFD700;
+}
+
+.firefly {
+  background: radial-gradient(circle, #E0FFFF 0%, #7FFFD4 80%, transparent 100%);
+  box-shadow: 0 0 12px #7FFFD4;
+}
+
+/* Environment styling for Day */
+.sun {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  width: 80px;
+  height: 80px;
+  background: #FFD700;
+  border-radius: 50%;
+  box-shadow: 0 0 40px #FFD700, 0 0 80px #FFA500;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* Environment styling for Night */
+.moon {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  width: 60px;
+  height: 60px;
+  background: transparent;
+  border-radius: 50%;
+  box-shadow: 15px 15px 0 0 #F0F8FF;
+  opacity: 0.8;
+  pointer-events: none;
+}

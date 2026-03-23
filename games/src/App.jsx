@@ -9,12 +9,17 @@ import OrientationGame from './pages/OrientationGame';
 import CompassGame from './pages/CompassGame';
 import GeoCacheGame from './pages/GeoCacheGame';
 import StarCatcherGame from './pages/StarCatcherGame';
+import VoiceWindmillGame from './pages/VoiceWindmillGame';
+import LightCatcherGame from './pages/LightCatcherGame';
+import VoiceBalloonGame from './pages/VoiceBalloonGame';
 
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/lightcatcher" element={<LightCatcherGame />} />
+        <Route path="/voiceballoon" element={<VoiceBalloonGame />} />
         <Route path="/shake" element={<ShakeGame />} />
         <Route path="/gravity" element={<GravityGame />} />
         <Route path="/rollball" element={<RollBallGame />} />
@@ -23,6 +28,7 @@ const App = () => {
         <Route path="/compass" element={<CompassGame />} />
         <Route path="/geocache" element={<GeoCacheGame />} />
         <Route path="/starcatcher" element={<StarCatcherGame />} />
+        <Route path="/windmill" element={<VoiceWindmillGame />} />
       </Routes>
     </Router>
   );
