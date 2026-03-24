@@ -40,6 +40,9 @@ const Home = () => {
         <Link to="/voiceballoon" className={`${styles.linkButton} ${styles.gravityBtn}`} style={{ marginTop: '15px', background: '#ff5722' }}>
           进入“声控吹气球”游戏 (全年龄段)
         </Link>
+        <Link to="/photogift" className={`${styles.linkButton} ${styles.greenButton}`} style={{ marginTop: '15px', background: '#e84393' }}>
+          进入“照片寻宝”游戏 (🎁)
+        </Link>
       </div>
     </div>
   );
