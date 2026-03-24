@@ -12,6 +12,7 @@ import StarCatcherGame from './pages/StarCatcherGame';
 import VoiceWindmillGame from './pages/VoiceWindmillGame';
 import LightCatcherGame from './pages/LightCatcherGame';
 import VoiceBalloonGame from './pages/VoiceBalloonGame';
+import PhotoGiftGame from './pages/PhotoGiftGame';
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/geocache" element={<GeoCacheGame />} />
         <Route path="/starcatcher" element={<StarCatcherGame />} />
         <Route path="/windmill" element={<VoiceWindmillGame />} />
+        <Route path="/photogift" element={<PhotoGiftGame />} />
       </Routes>
     </Router>
   );

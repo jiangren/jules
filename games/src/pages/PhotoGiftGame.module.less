@@ -1,0 +1,288 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f0f8ff; // 浅蓝色背景，护眼
+  font-family: 'Comic Sans MS', 'Arial', sans-serif; // 儿童风字体
+  overflow: hidden;
+  position: relative;
+}
+
+.screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.title {
+  font-size: 2.5rem;
+  color: #ff6b6b;
+  text-shadow: 2px 2px 0px #fff;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.desc {
+  font-size: 1.2rem;
+  color: #555;
+  text-align: center;
+  margin-bottom: 40px;
+  line-height: 1.5;
+  padding: 0 20px;
+}
+
+.btnPrimary {
+  background-color: #ff9f43;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 15px 40px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(255, 159, 67, 0.4);
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+  margin-bottom: 15px;
+
+  &:hover {
+    background-color: #ff8c21;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.btnSecondary {
+  background-color: #10ac84;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 15px 40px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(16, 172, 132, 0.4);
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+  margin-bottom: 15px;
+
+  &:hover {
+    background-color: #0d9670;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.btnBack {
+  background-color: transparent;
+  color: #888;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: #eee;
+    color: #555;
+  }
+}
+
+// 相机视图
+.cameraView, .photoView {
+  flex: 1;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.videoElement, .photoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; // 充满屏幕
+  pointer-events: none; // 防止点击图片本身触发拖拽
+}
+
+.cameraOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  z-index: 10;
+}
+
+.instruction {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  display: inline-block;
+  backdrop-filter: blur(5px);
+}
+
+.instructionTop {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 107, 107, 0.8);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  white-space: nowrap;
+  z-index: 10;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.05); }
+  100% { transform: translateX(-50%) scale(1); }
+}
+
+.controls {
+  width: 100%;
+  padding: 20px;
+  background-color: #2c3e50;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
+  z-index: 10;
+}
+
+.controlsRow {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.btnCapture {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: white;
+  border: 5px solid #ff9f43;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.1s;
+
+  &:active {
+    transform: scale(0.9);
+    background-color: #eee;
+  }
+}
+
+// 礼物图标
+.giftIcon {
+  position: absolute;
+  font-size: 3rem;
+  transform: translate(-50%, -50%); // 居中于点击位置
+  pointer-events: none; // 不阻挡底层点击
+  z-index: 20;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+}
+
+.giftIconResult {
+  position: absolute;
+  font-size: 4rem;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 20;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.6));
+}
+
+// 结果面板
+.resultPanel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  padding: 30px 20px;
+  box-sizing: border-box;
+  text-align: center;
+  box-shadow: 0 -5px 20px rgba(0,0,0,0.2);
+  z-index: 30;
+  animation: slideUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.successText {
+  color: #10ac84;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.failText {
+  color: #ff6b6b;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+// Loading
+.loadingOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 50;
+  font-size: 1.2rem;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255,255,255,0.3);
+  border-top-color: #ff9f43;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
