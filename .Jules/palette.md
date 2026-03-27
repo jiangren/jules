@@ -1,0 +1,3 @@
+## 2024-05-24 - Focus States for Custom Link Buttons
+**Learning:** Custom styled buttons or links in this app (like `.linkButton` on the Home page) often lack explicit focus indicators, which breaks keyboard navigation accessibility because the browser's default outline might be masked or insufficient against custom backgrounds.
+**Action:** Always verify keyboard focus states when creating or modifying custom button-like elements. Use `&:focus-visible` to add clear, high-contrast outlines (e.g., `outline: 3px solid #0984e3; outline-offset: 2px;`) that don't interfere with mouse clicks but provide essential guidance for keyboard users.
