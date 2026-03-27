@@ -11,36 +11,36 @@ const Home = () => {
           进入“摇一摇”游戏
         </Link>
         <Link to="/gravity" className={`${styles.linkButton} ${styles.gravityBtn}`}>
-          重力音乐球 (全年龄)
+          重力音乐球 (全年龄环绕)
         </Link>
         <Link to="/rollball" className={styles.linkButton}>
           进入“平衡滚球”游戏
         </Link>
-        <Link to="/catch" className={styles.linkButton} style={{ marginTop: '15px' }}>
+        <Link to="/catch" className={`${styles.linkButton} ${styles.orangeButton}`}>
           进入“重力接球”游戏
         </Link>
         <Link to="/orientation" className={`${styles.linkButton} ${styles.greenButton}`}>
           进入“重力感应滚球”游戏
         </Link>
-        <Link to="/compass" className={styles.linkButton} style={{ marginTop: '15px' }}>
+        <Link to="/compass" className={styles.linkButton}>
           进入“魔法指南针”游戏
         </Link>
-        <Link to="/geocache" className={`${styles.linkButton} ${styles.gravityBtn}`} style={{ marginTop: '15px' }}>
+        <Link to="/geocache" className={`${styles.linkButton} ${styles.gravityBtn}`}>
           进入“地理寻宝”游戏
         </Link>
-        <Link to="/starcatcher" className={`${styles.linkButton} ${styles.gravityBtn}`} style={{ marginTop: '15px', backgroundColor: '#34495e' }}>
+        <Link to="/starcatcher" className={`${styles.linkButton} ${styles.darkButton}`}>
           进入“全景捕星星”游戏
         </Link>
-        <Link to="/windmill" className={`${styles.linkButton} ${styles.greenButton}`} style={{ marginTop: '15px' }}>
+        <Link to="/windmill" className={`${styles.linkButton} ${styles.greenButton}`}>
           进入“声控音乐风车”游戏
         </Link>
-        <Link to="/lightcatcher" className={`${styles.linkButton} ${styles.greenButton}`} style={{ marginTop: '15px', background: 'linear-gradient(45deg, #FFD700, #FFA500)', color: '#333' }}>
+        <Link to="/lightcatcher" className={`${styles.linkButton} ${styles.goldButton}`}>
           进入“捕光者”游戏 (重力&时间)
         </Link>
-        <Link to="/voiceballoon" className={`${styles.linkButton} ${styles.gravityBtn}`} style={{ marginTop: '15px', background: '#ff5722' }}>
+        <Link to="/voiceballoon" className={`${styles.linkButton} ${styles.orangeButton}`}>
           进入“声控吹气球”游戏 (全年龄段)
         </Link>
-        <Link to="/photogift" className={`${styles.linkButton} ${styles.greenButton}`} style={{ marginTop: '15px', background: '#e84393' }}>
+        <Link to="/photogift" className={`${styles.linkButton} ${styles.pinkButton}`}>
           进入“照片寻宝”游戏 (🎁)
         </Link>
       </div>

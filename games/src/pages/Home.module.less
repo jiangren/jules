@@ -2,53 +2,109 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   height: 100vh;
-  padding: 20px;
+  padding: 40px 20px 60px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
 .title {
-  font-size: 28px;
+  font-size: 32px;
+  font-weight: 700;
   margin-bottom: 40px;
-  color: #333;
+  color: #2d3436;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  letter-spacing: 2px;
 }
 
 .menu {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
   width: 100%;
-  max-width: 300px;
+  max-width: 340px;
 }
 
 .linkButton {
   display: block;
   text-align: center;
-  padding: 15px 20px;
-  background-color: #007bff;
-  color: white;
+  padding: 20px 24px;
+  background: white;
+  color: #0984e3;
   text-decoration: none;
   font-size: 18px;
-  border-radius: 8px;
-  transition: background-color 0.2s;
+  font-weight: 600;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05), 0 10px 15px -3px rgba(0,0,0,0.1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(5px);
 
   &:hover {
-    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+    background-color: #f8f9fa;
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   }
 }
 
 .gravityBtn {
-  background-color: #4caf50;
+  background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+  color: white;
 
   &:hover {
-    background-color: #388e3c;
+    background: linear-gradient(135deg, #5b4cc4 0%, #8e85ee 100%);
   }
 }
 
 .greenButton {
-  background-color: #28a745;
+  background: linear-gradient(135deg, #00b894 0%, #55efc4 100%);
+  color: white;
 
   &:hover {
-    background-color: #218838;
+    background: linear-gradient(135deg, #00a483 0%, #4ae1b8 100%);
+  }
+}
+
+.goldButton {
+  background: linear-gradient(45deg, #FFD700 0%, #FFA500 100%);
+  color: #333;
+
+  &:hover {
+    background: linear-gradient(45deg, #e6c200 0%, #e69500 100%);
+  }
+}
+
+.orangeButton {
+  background: linear-gradient(135deg, #ff7675 0%, #ff5722 100%);
+  color: white;
+
+  &:hover {
+    background: linear-gradient(135deg, #e17055 0%, #e64a19 100%);
+  }
+}
+
+.pinkButton {
+  background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+  color: white;
+
+  &:hover {
+    background: linear-gradient(135deg, #e84393 0%, #d63031 100%);
+  }
+}
+
+.darkButton {
+  background: linear-gradient(135deg, #636e72 0%, #2d3436 100%);
+  color: white;
+
+  &:hover {
+    background: linear-gradient(135deg, #2d3436 0%, #000000 100%);
   }
 }
