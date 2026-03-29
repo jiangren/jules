@@ -1,0 +1,3 @@
+## 2026-03-29 - Added focus-visible states to custom H5 buttons
+**Learning:** The default custom link buttons in the games portal were completely lacking visual focus states, making keyboard navigation nearly impossible as the user cannot see which button has focus. Adding a high-contrast outline using `&:focus-visible` with `outline-offset` is an effective and safe CSS addition that vastly improves keyboard accessibility without interfering with mouse clicks.
+**Action:** Ensure all future custom buttons and interactive components across the `games` platform include explicit `&:focus-visible` styles.
