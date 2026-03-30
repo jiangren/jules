@@ -1,0 +1,3 @@
+## 2024-05-18 - Missing Focus Visible Styles on Custom Links
+**Learning:** In the `games` project, custom links and buttons heavily use CSS gradients, box shadows, and transforms (e.g., in `.linkButton` of `Home.module.less`). These styles, combined with browser defaults, often make default focus outlines difficult to see or entirely invisible when navigating via keyboard. This breaks accessibility for keyboard users relying on tab navigation.
+**Action:** Always include an explicit `&:focus-visible` state (e.g., a high-contrast `outline` and `outline-offset`) for interactive elements styled with CSS Modules (.less) to ensure keyboard navigation accessibility is explicitly maintained and not masked by other visual effects.
