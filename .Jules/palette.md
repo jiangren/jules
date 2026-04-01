@@ -1,0 +1,3 @@
+## 2024-05-24 - Explicit Focus Styles for Custom Links/Buttons
+**Learning:** Default browser outlines on custom links and buttons (especially those with complex background styling or gradients) are often masked, hidden, or visually confusing, leading to poor keyboard accessibility. This makes navigating the interface with a keyboard difficult or impossible.
+**Action:** Always include an explicit `&:focus-visible` state when styling custom interactive elements (like `.linkButton`) in CSS Modules. Use clear, high-contrast outlines (e.g., `outline: 3px solid #0984e3; outline-offset: 4px;`) to ensure the focused element is visibly highlighted.
