@@ -1,0 +1,3 @@
+## 2024-05-13 - Enhance semantic navigation and focus styles
+**Learning:** Using generic `<div>` elements for menus impedes screen readers. Additionally, when styling links or buttons in H5 games with CSS Modules, default browser focus rings may be insufficient or masked by other visual styles (like box-shadow or backdrop-filter).
+**Action:** Replace `<div>` wrappers for menus with `<nav>` and an appropriate `aria-label` (e.g., in Chinese: "游戏菜单" to match the interface). Always explicitly declare `&:focus-visible` with a high-contrast outline on custom styled interactive elements (`.linkButton`) to ensure keyboard accessibility.
