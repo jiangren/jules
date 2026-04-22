@@ -1,0 +1,3 @@
+## 2024-04-22 - Semantic Navigation and Focus States
+**Learning:** In the games project, game collections built with React use generic `<div>` wrappers for lists of links, lacking semantic meaning for screen readers. Furthermore, custom CSS styling on buttons/links often obscures default browser focus indicators, hindering keyboard accessibility.
+**Action:** Wrap link collections in `<nav aria-label="游戏菜单">` (using Chinese to match the platform) and explicitly define `&:focus-visible { outline: 3px solid #0984e3; outline-offset: 2px; }` styles in CSS modules for all interactive elements to ensure reliable keyboard navigation.
