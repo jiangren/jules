@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>H5 游戏中心</h1>
-      <div className={styles.menu}>
+      <nav className={styles.menu} aria-label="游戏菜单">
         <Link to="/shake" className={styles.linkButton}>
           进入“摇一摇”游戏
         </Link>
@@ -43,7 +43,7 @@ const Home = () => {
         <Link to="/photogift" className={`${styles.linkButton} ${styles.pinkButton}`}>
           进入“照片寻宝”游戏 (🎁)
         </Link>
-      </div>
+      </nav>
     </div>
   );
 };
