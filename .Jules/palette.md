@@ -1,0 +1,3 @@
+## 2024-04-27 - Semantic Navigation and Keyboard Focus in H5 Game Center
+**Learning:** Using generic `<div>` tags for navigation menus hides the structure from screen readers. Default browser focus outlines are often insufficient or masked by custom button styles, making keyboard navigation difficult. User-facing accessibility attributes must match the platform's primary language (Chinese).
+**Action:** Replaced the `<div>` wrapper with a semantic `<nav aria-label="游戏菜单">` element in the Home component. Added explicit `&:focus-visible { outline: 3px solid #0984e3; outline-offset: 4px; }` styles to all custom link buttons to ensure high contrast and clear visibility during keyboard navigation.
