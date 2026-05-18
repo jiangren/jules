@@ -1,0 +1,3 @@
+## 2024-11-20 - Semantic Navigation and Focus Styles in Game Menu
+**Learning:** The games project's main menu relies on generic `<div>` wrappers for navigation links, and its custom styled CSS module links lack explicit keyboard focus states (`:focus-visible`), relying only on `hover`/`active`. This degrades screen reader experience and keyboard accessibility.
+**Action:** Always use `<nav>` with Chinese `aria-label` (e.g., `aria-label="游戏菜单"`) for link collections, and include `&:focus-visible` with high-contrast outlines (e.g., `outline: 3px solid #0984e3; outline-offset: 2px;`) in CSS modules to ensure keyboard accessibility.
